@@ -1,37 +1,30 @@
 import React, { useState } from 'react';
 import './Navbar.scss';
-import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMobile(!isMobile);
   };
 
   return (
     <nav className="navbar">
-      <div className="navbar-container">
-        <div className="logo">My<span>Portfolio</span></div>
-        
-        <div className={`menu ${isMenuOpen ? "open" : ""}`}>
-          <ul className="nav-links">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/services">Projects</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/contact">Contact Me</Link></li>
-          </ul>
-        </div>
-        <div className={`hamburger ${isMenuOpen ? "active" : ""}`} onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+      <div className="logo">Portfolio</div>
+      <ul className={`nav-links ${isMobile ? 'active' : ''}`}>
+        <li><a href="/about">About</a></li>
+        <li><a href="/experiance">Experiance</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/clients">Clients</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <div className={`menu-toggle ${isMobile ? 'active' : ''}`} onClick={toggleMenu}>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </nav>
   );
 };
 
 export default Navbar;
-
-
