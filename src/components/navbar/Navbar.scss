@@ -1,39 +1,21 @@
 /* Navbar.scss */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  background: #121212;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .navbar {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative; /* Changed from fixed/absolute to relative */
+  margin: 10px auto; /* Center the navbar */
   width: 90%;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 25px;
   background: rgba(20, 20, 20, 0.9);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); /* Nice glassy effect */
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 1000;
+  border: 1px solid white;
+  z-index: 1;
 }
 
+/* Logo Styling */
 .logo {
   font-size: 26px;
   font-weight: bold;
@@ -43,6 +25,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+/* Navbar Links Styling */
 .nav-links {
   list-style: none;
   display: flex;
@@ -53,14 +36,30 @@ body {
   text-decoration: none;
   color: white;
   font-size: 18px;
+  font-weight: 600;
   padding: 10px 15px;
-  transition: transform 0.3s ease;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
-.nav-links li a:hover {
-  color: #ff416c;
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  border-radius: 2px;
 }
 
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+/* Mobile Menu Toggle Styling */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -79,6 +78,7 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
+/* Menu Toggle Animation */
 .menu-toggle.active span:nth-child(1) {
   transform: translateY(10px) rotate(45deg);
 }
@@ -91,18 +91,20 @@ body {
   transform: translateY(-10px) rotate(-45deg);
 }
 
+/* Mobile View Handling */
 @media (max-width: 768px) {
   .nav-links {
     position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
+    top: 50px;
+    left: 0; /* Align to the left of the screen */
+    width: 90%;
     background: rgba(20, 20, 20, 0.95);
     flex-direction: column;
     text-align: center;
     padding: 15px;
     border-radius: 16px;
     display: none;
+    transform: dropdown 0.3s ease; /* Smooth transition for dropdown */
   }
 
   .nav-links.active {
@@ -111,5 +113,11 @@ body {
 
   .menu-toggle {
     display: flex;
+  }
+
+  .nav-links li a {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
   }
 }

@@ -1,14 +1,43 @@
 body {
+  background-color: #f0f0f0;
+  color: white;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 10px auto;
   padding: 20px;
+  max-width: 1200px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* About.scss, Experience.scss, Projects.scss, Clients.scss */
+
+section {
+  position: relative; /* Changed from fixed/absolute to relative */
+  margin: 10px auto; /* Center the navbar */
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the content horizontally */
+  flex-direction: column; /* Stack items vertically */
+  align-content: center;
+  padding: 15px 25px;
+  background: rgba(20, 20, 20, 0.9);
+  backdrop-filter: blur(10px); /* Nice glassy effect */
+  border-radius: 16px;
+  border: 1px solid white;
+}
+
+h1 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+p {
+  color: white;
 }

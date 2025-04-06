@@ -1,16 +1,22 @@
 import React from 'react';
 import Navbar from './components/navbar/Navbar'; 
 import './index.css';
+import Footer from './components/footer/Footer';
+import About from './components/about/About';
+import Experience from './components/experience/Experience';
+import Projects from './components/projects/Projects';
+import Clients from './components/clients/Clients';
 // import { Routes, Route } from 'react-router-dom';
 
 const App: React.FC = () => {
   return (
     <>
-       <Navbar />
-      <div className="container" style={{ paddingTop: '100px' }}>
-        <h1>Welcome to Sujith's Portfolio</h1>
-        <p>This is a modern, responsive portfolio site built with React and SCSS.</p>
-      </div>
+    <Navbar />
+    <About />
+    <Experience />
+    <Projects />
+    <Clients />
+    <Footer/>
     </>
   );
 };
