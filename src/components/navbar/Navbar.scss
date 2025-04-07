@@ -95,9 +95,9 @@
 @media (max-width: 768px) {
   .nav-links {
     position: absolute;
-    top: 50px;
-    left: 0; /* Align to the left of the screen */
-    width: 90%;
+    top: 50px; /* Position below the navbar */
+    right: 0; /* Align to the right of the screen */
+    left: 0;
     background: rgba(20, 20, 20, 0.95);
     flex-direction: column;
     text-align: center;
@@ -116,7 +116,6 @@
   }
 
   .nav-links li a {
-    padding: 10px;
     width: 100%;
     text-align: center;
   }

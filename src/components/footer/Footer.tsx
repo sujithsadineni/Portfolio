@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
         </div>
         <p>Sujith Sadineni's Portfolio.</p>
         <p></p>
-        <p>© 2024 All rights reserved. Designed and Developed By < FaReact /> React and SCSS</p>
+        <p className= "copy-right">© 2024 All rights reserved. Designed and Developed By < FaReact /> React and SCSS</p>
         <p></p>
       </div>
     </footer>
