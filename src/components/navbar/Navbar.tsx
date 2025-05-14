@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="navbar">
-      <div className="logo">Portfolio</div>
+      <div className="logo">Sujith Sadineni</div>
       <ul className={`nav-links ${isMobile ? 'active' : ''}`}>
         <li><a href="#about">About</a></li>
         <li><a href="#experiance">Experiance</a></li>
