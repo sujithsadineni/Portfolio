@@ -4,15 +4,15 @@ import { FaFilePdf, FaLinkedin } from "react-icons/fa";
 import "./About.scss";
 
 const techLogos = [
-  { name: "React", src: "/Portfolio/src/assets/react.svg" },
-  { name: "Node.js", src: "/Portfolio/src/assets/nodejs.svg" },
-  { name: "AWS", src: "/Portfolio/src/assets/aws.svg" },
-  { name: "GraphQL", src: "/Portfolio/src/assets/graphql.svg" },
-  { name: "Docker", src: "/Portfolio/src/assets/docker.svg" },
-  { name: "TypeScript", src: "/Portfolio/src/assets/typescript.svg" },
-  { name: "Java", src: "/Portfolio/src/assets/java.svg" },
-  { name: "Spring", src: "/Portfolio/src/assets/spring.svg" },
-  { name: "Angular", src: "/Portfolio/src/assets/angular.svg" },
+  { name: "React", src: "/Portfolio/assets/react.svg" },
+  { name: "Node.js", src: "/Portfolio/assets/nodejs.svg" },
+  { name: "AWS", src: "/Portfolio/assets/aws.svg" },
+  { name: "GraphQL", src: "/Portfolio/assets/graphql.svg" },
+  { name: "Docker", src: "/Portfolio/assets/docker.svg" },
+  { name: "TypeScript", src: "/Portfolio/assets/typescript.svg" },
+  { name: "Java", src: "/Portfolio/src/java.svg" },
+  { name: "Spring", src: "/Portfolio/src/spring.svg" },
+  { name: "Angular", src: "/Portfolio/assets/angular.svg" },
 ];
 
 const generateGridPositions = (cols: number, rows: number) => {
