@@ -117,7 +117,7 @@ const About: React.FC = () => {
 
         {/* RIGHT: Tech Bubble Pop Game */}
         <div className="tech-bubble-game">
-          <h2>👆 CLICK TO POP</h2>
+          <h2>👆 CLICK TO POP THE LOGO</h2>
           <div className="bubble-area">
             {bubbles.map((bubble, index) => (
               <img
