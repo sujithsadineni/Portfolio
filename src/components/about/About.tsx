@@ -10,8 +10,8 @@ const techLogos = [
   { name: "GraphQL", src: "/Portfolio/assets/graphql.svg" },
   { name: "Docker", src: "/Portfolio/assets/docker.svg" },
   { name: "TypeScript", src: "/Portfolio/assets/typescript.svg" },
-  { name: "Java", src: "/Portfolio/src/java.svg" },
-  { name: "Spring", src: "/Portfolio/src/spring.svg" },
+  { name: "Java", src: "/Portfolio/assets/java.svg" },
+  { name: "Spring", src: "/Portfolio/assets/spring.svg" },
   { name: "Angular", src: "/Portfolio/assets/angular.svg" },
 ];
 
