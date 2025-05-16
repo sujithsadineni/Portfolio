@@ -61,9 +61,9 @@ const ProfessionalExperience: React.FC = () => {
                 <div>
                   <h3 className="company">{item.company}</h3>
                   <h3>{item.title}</h3>
-                  <p>{item.description}</p>
                 </div>
               </div>
+              <p className="description">{item.description}</p>
             </div>
             <div className="dot" />
           </div>

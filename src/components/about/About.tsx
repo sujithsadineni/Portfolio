@@ -63,7 +63,8 @@ const About: React.FC = () => {
       <div className="about-wrapper">
         {/* LEFT: About Text */}
         <div className="about-text">
-          <h1>👋 Hi, I'm Sujith Kumar Sadineni</h1>
+          <h1>👋 Hi, </h1>
+          <h1>I'm Sujith Kumar Sadineni</h1>
           <div className="typewriter-text">
             <Typewriter
               options={{

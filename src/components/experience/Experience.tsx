@@ -8,6 +8,7 @@ import {
   FaVial,
   FaJava,
 } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 import "./Experience.scss";
 
 const experienceData = [
@@ -22,8 +23,7 @@ const experienceData = [
     title: "Backend Development",
     icon: (
       <>
-        <FaNodeJs /> +
-        <FaJava />
+        <FaNodeJs /> + <FaJava />
       </>
     ),
     short: "Node.js, Express, Java, Spring Boot",
@@ -68,22 +68,40 @@ const Experience: React.FC = () => {
       <h2>Areas of Expertise</h2>
       <p className="subtitle">
         Based on 6+ years of experience as a Full-Stack Developer with React,
-        Node, java, SpringBoot & AWS.
+        Node, Java, SpringBoot & AWS.
       </p>
       <div className="experience-grid">
-        {experienceData.map((item, index) => (
-          <div
-            key={index}
-            className={`experience-card ${
-              activeIndex === index ? "active" : ""
-            }`}
-            onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-          >
-            <div className="icon">{item.icon}</div>
-            <h3>{item.title}</h3>
-            <p>{activeIndex === index ? item.details : item.short}</p>
-          </div>
-        ))}
+        {experienceData.map((item, index) => {
+          const isActive = activeIndex === index;
+          const isHidden = activeIndex !== null && !isActive;
+
+          return (
+            <div
+              key={index}
+              className={`experience-card ${isActive ? "active" : ""} ${
+                isHidden ? "hidden" : ""
+              }`}
+              onClick={() => {
+                if (!isActive) setActiveIndex(index);
+              }}
+            >
+              {isActive && (
+                <button
+                  className="close-button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveIndex(null);
+                  }}
+                >
+                  <IoClose />
+                </button>
+              )}
+              <div className="icon">{item.icon}</div>
+              <h3>{item.title}</h3>
+              <p>{isActive ? item.details : item.short}</p>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
