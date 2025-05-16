@@ -3,6 +3,9 @@
   background-color: #111;
   color: white;
   text-align: center;
+  border: 1px solid #333;
+  border-radius: 12px;
+  width: 80%;
 
   h2 {
     font-size: 2rem;
@@ -52,7 +55,7 @@
   .content {
     background: #1e1e1e;
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1rem;
     text-align: left;
     box-shadow: 0 0 15px rgba(0, 255, 198, 0.1);
     display: flex;
@@ -73,12 +76,14 @@
     .date {
       color: #00ffc6;
       font-weight: bold;
+      text-align: right;
     }
 
     .card {
       display: flex;
       gap: 1rem;
       align-items: flex-start;
+      align-items: center;
 
       img {
         width: 100px;
@@ -86,7 +91,6 @@
         object-fit: contain;
         border-radius: 4px;
         background: #fff;
-        padding: 4px;
       }
 
       h3 {
@@ -95,9 +99,8 @@
       }
 
       .company {
-        font-size: 0.9rem;
-        color: #aaa;
-        margin-top: 2px;
+        font-size: 1rem;
+        color: #00ffc6;
       }
 
       p {

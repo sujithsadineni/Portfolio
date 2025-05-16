@@ -3,12 +3,20 @@ import "./ProfessionalExperience.scss";
 
 const timeline = [
   {
-    date: "Dec 2022 – Present",
+    date: "May 2025 – Present",
     title: "Senior Full-Stack Developer",
-    company: "Morgan Stanly",
+    company: "North Carolina State",
+    logo: "/Portfolio/nc-state.jpg",
+    description:
+      "Designed SPAs with React, Hooks, and Redux. Built scalable APIs with Node.js/Express, implemented JWT auth, CI/CD using Jenkins, AWS ECS, and monitored apps with CloudWatch and ELK Stack.",
+  },
+  {
+    date: "Dec 2022 – May 2025",
+    title: "Senior Full-Stack Developer",
+    company: "Morgan Stanley",
     logo: "/Portfolio/morgan.jpeg",
     description:
-      "Leading scalable frontend and backend systems using React, GraphQL, Node.js and Next.js. Delivered secure authentication and reusable UI libraries.",
+      "Delivered secure microservices using Node.js, Prisma ORM, and PostgreSQL. Led CI/CD workflows via Jenkins and AWS CodePipeline. Maintained SPAs using React, SASS, and RTL.",
   },
   {
     date: "2022 – 2024",
@@ -16,23 +24,23 @@ const timeline = [
     company: "Southern Arkansas University",
     logo: "/Portfolio/sau.png",
     description:
-      "Built feature flag platforms and contributed to large-scale product releases using React, Node.js, Express and GraphQL. Delivered CI/CD improvements.",
+      "Completed MS in Computer Science. Built full-stack apps with React, GraphQL, Node.js. Improved backend performance with Express middleware and PostgreSQL indexing.",
   },
   {
-    date: "2016 – 2021",
-    title: "Software Engineer",
-    company: "Wells Fargo",
-    logo: "/Portfolio/assets/wellsfargo.svg",
+    date: "Apr 2019 – Aug 2022",
+    title: "Full-Stack Developer",
+    company: "Cognizant",
+    logo: "/Portfolio/Cognizant-Logo.png",
     description:
-      "Maintained enterprise-grade banking UIs using React, Redux, and JavaScript. Mentored developers and improved code reusability across teams.",
+      "Developed scalable SPAs using React.js and Hooks. Built GraphQL APIs with Java Spring Boot. Focused on accessibility, modular styling (SCSS), and CI/CD with Docker & Jenkins.",
   },
   {
-    date: "2011 – 2015",
-    title: "B.Tech in Computer Science",
-    company: "JNTU Hyderabad",
-    logo: "/Portfolio/assets/jntu.png",
+    date: "2015 – 2019",
+    title: "B.E in Computer Science",
+    company: "St Joseph's College Of Engineering",
+    logo: "/Portfolio/st.joseph.logo.png",
     description:
-      "Graduated with strong academic performance and built foundational skills in Java, OOPs, and data structures.",
+      "Graduated in Computer Science. Gained strong foundation in Java, OOP, data structures, and participated in web and full-stack development internships.",
   },
 ];
 
@@ -51,8 +59,8 @@ const ProfessionalExperience: React.FC = () => {
               <div className="card">
                 <img src={item.logo} alt={`${item.company} logo`} />
                 <div>
+                  <h3 className="company">{item.company}</h3>
                   <h3>{item.title}</h3>
-                  <p className="company">{item.company}</p>
                   <p>{item.description}</p>
                 </div>
               </div>
