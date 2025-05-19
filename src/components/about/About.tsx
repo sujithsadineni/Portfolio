@@ -70,10 +70,12 @@ const About: React.FC = () => {
               options={{
                 strings: [
                   "Senior Full-Stack Developer",
-                  "React | Angular | TypeScript | JavaScript",
+                  "7 Years of professionsl Experience ",
+                  "AWS Certified Solution Architect 🚀",
+                  "React.js | Angular.js | TypeScript ",
                   "Node.js | Java | SpringBoot | Express.js",
-                  "6+ Years Experience | AWS Certified Solution Architect ",
                   "Building Scalable & Secure Web Apps",
+                  "Providing End to End Solutions",
                 ],
                 autoStart: true,
                 loop: true,
