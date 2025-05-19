@@ -15,7 +15,7 @@
 }
 
 .subtitle {
-  color: #aaa;
+  color: #ddd9d9;
   font-size: 1rem;
   margin-bottom: 2rem;
 }
@@ -34,7 +34,7 @@
   border: 1px solid #333;
   border-radius: 12px;
   padding: 1.5rem;
-  width: 250px;
+  width: 255px;
   transition: all 0.4s ease;
   cursor: pointer;
   text-align: left;
@@ -53,11 +53,13 @@
     font-size: 1.2rem;
     font-weight: bold;
     color: #fff;
+    margin: 0%;
   }
 
   p {
-    color: #ccc;
+    color: white;
     font-size: 0.95rem;
+    // margin: 0%;
   }
 }
 .experience-card.active {
@@ -72,11 +74,22 @@
   overflow-y: auto;
   display: flex;
   margin: 0%;
+  align-items: center;
 
   .icon {
     font-size: 2.5rem;
     color: #00ffc6;
     margin-bottom: 5px;
+    text-align: center;
+  }
+  ul {
+    padding-left: 20px;
+    margin-top: 10px;
+    list-style-type: disc;
+
+    li {
+      margin-bottom: 6px;
+    }
   }
 
   h3 {
@@ -89,8 +102,9 @@
   p {
     font-size: 1rem;
     line-height: 1.6;
-    color: #ccc;
-    text-align: center;
+    color: white;
+
+    left: 0%;
   }
 
   .close-button {
