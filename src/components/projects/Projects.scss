@@ -62,6 +62,10 @@
       background: #1e1e1e;
       border: 1px solid #333;
       color: white;
+
+      &:hover {
+        border-color: #00ffc6;
+      }
     }
 
     .card-back {
@@ -76,10 +80,21 @@
         margin-bottom: 1rem;
       }
 
-      a {
-        color: #00d9ff;
+      .Project-links {
+        background-color: #00ffc6;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
         font-weight: bold;
-        text-decoration: underline;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.95rem;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          opacity: 0.85;
+        }
       }
 
       .close-button {

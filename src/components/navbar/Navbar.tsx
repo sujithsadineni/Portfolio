@@ -10,7 +10,9 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="navbar">
-      <div className="logo">Sujith Sadineni</div>
+      <div className="logo">
+        <a href="#">Sujith Sadineni</a>
+      </div>
       <ul className={`nav-links ${isMobile ? "active" : ""}`}>
         <li>
           <a href="#about">About</a>

@@ -6,8 +6,7 @@ import About from "./components/about/About";
 import Experience from "./components/experience/Experience";
 import Projects from "./components/projects/Projects";
 import ProfessionalExperience from "./components/experience/ProfessionalExperience";
-// import { Routes, Route } from 'react-router-dom';
-
+import Contact from "./components/footer/Contact";
 const App: React.FC = () => {
   return (
     <>
@@ -16,6 +15,7 @@ const App: React.FC = () => {
       <Experience />
       <ProfessionalExperience />
       <Projects />
+      <Contact />
       <Footer />
     </>
   );

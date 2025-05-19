@@ -14,8 +14,9 @@ const projects = [
     link: "https://github.com/sujithsadineni/File-Upload-S3",
   },
   {
-    title: "Dev Tools",
-    description: "CLI & GUI tools for formatting, parsing and productivity.",
+    title: "House Renting website",
+    description:
+      "replica version on Sulekha.com with clean UI and More Advance Search Algorithm",
     link: "https://github.com/your-username/dev-tools",
   },
   {
@@ -29,7 +30,7 @@ const projects = [
     link: "https://github.com/your-username/github-automation",
   },
   {
-    title: "My.posts.com",
+    title: "MyPosts.com",
     description:
       " I designed a application for user interactive posts with autentication and authorization",
     link: "https://github.com/sujithsadineni/Full-Stack",
@@ -66,13 +67,15 @@ const Projects: React.FC = () => {
                     <IoClose />
                   </button>
                   <p>{project.description}</p>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Project ↗
-                  </a>
+                  <div className="Project-links">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Project
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
