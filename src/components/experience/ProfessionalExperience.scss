@@ -71,7 +71,7 @@
     }
 
     .date {
-      color: #00ffc6;
+      color: #edf5f3;
       font-weight: bold;
       text-align: right;
     }
@@ -96,7 +96,8 @@
       }
 
       .company {
-        font-size: 1rem;
+        margin-top: 4px;
+        font-size: 1.2rem;
         color: #00ffc6;
       }
     }
@@ -136,6 +137,7 @@
 
     &.right {
       left: 0;
+      right: 0;
     }
 
     .dot {

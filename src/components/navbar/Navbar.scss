@@ -11,6 +11,7 @@
   align-items: center;
   padding: 15px 25px;
   z-index: 1000;
+  background-color: rgb(36, 36, 36);
   // border-bottom: 1px solid #00ffc6;
 }
 
@@ -97,12 +98,13 @@
     top: 60px;
     right: 0;
     left: 0;
-    background-color: #121212;
+    background-color: #292929;
     flex-direction: column;
     text-align: center;
     padding: 15px;
     border-radius: 0 0 10px 10px;
     display: none;
+    overflow: hidden;
   }
 
   .nav-links.active {

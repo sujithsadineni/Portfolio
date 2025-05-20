@@ -64,13 +64,13 @@ const Footer: React.FC = () => {
         <p>Sujith Sadineni's Portfolio.</p>
 
         <p className="tech-used">
-          🛠 Built with React 19, Vite, TypeScript, EmailJS, SCSS, and GitHub
-          Pages
+          🛠 Built with React 19, confetti, Vite, TypeScript, EmailJS, SCSS, and
+          GitHub Pages
         </p>
 
         <p className="copy-right">
           © 2024 All rights reserved. Designed and Developed By <FaReact />{" "}
-          React and SCSS
+          React , TypeScript and SCSS
         </p>
         <p></p>
       </div>
