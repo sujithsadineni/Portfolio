@@ -51,56 +51,57 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="contact-section">
-      <h2>📬 Contact Me</h2>
-      <form onSubmit={handleSubmit} className="contact-form">
-        <label>
-          Your Name
-          <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Your Email
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Subject
-          <input
-            type="text"
-            name="subject"
-            value={form.subject}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Message
-          <textarea
-            name="message"
-            rows={5}
-            value={form.message}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <button type="submit">Send Message</button>
-      </form>
-
+    <>
+      <section id="contact" className="contact-section">
+        <h2>📬 Contact Me</h2>
+        <form onSubmit={handleSubmit} className="contact-form">
+          <label>
+            Your Name
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Your Email
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Subject
+            <input
+              type="text"
+              name="subject"
+              value={form.subject}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Message
+            <textarea
+              name="message"
+              rows={5}
+              value={form.message}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <button type="submit">Send Message</button>
+        </form>
+      </section>
       {status && (
         <div className={`custom-alert ${status.type}`}>{status.message}</div>
       )}
-    </section>
+    </>
   );
 };
 
