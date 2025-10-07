@@ -5,7 +5,7 @@ const timeline = [
   {
     date: "May 2025 – Present",
     title: "Senior Full-Stack Developer",
-    company: "North Carolina State",
+    company: "NC DHHS",
     logo: "/Portfolio/nc-state.jpg",
     description:
       "Designed SPAs with React, Hooks, and Redux. Built scalable APIs with Node.js/Express, implemented JWT auth, CI/CD using Jenkins, AWS ECS, and monitored apps with CloudWatch and ELK Stack.",
