@@ -52,6 +52,8 @@ body {
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%; // stop iOS from inflating text on its own
+  text-size-adjust: 100%;
 }
 
 :focus-visible {

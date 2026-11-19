@@ -45,6 +45,12 @@
     font-weight: 700;
     font-size: 1.1rem;
     white-space: nowrap;
+    min-width: 0; // tiny phones: let the name shrink instead of pushing the buttons off-screen
+
+    .name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     .mono {
       display: grid;
@@ -254,6 +260,7 @@
     }
     .bar {
       padding: 0 16px;
+      gap: 12px;
     }
   }
   @media (min-width: 861px) {

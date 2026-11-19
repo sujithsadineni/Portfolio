@@ -155,7 +155,7 @@ const GameBoard: React.FC = () => {
   const badgeInfo = (b: string) => games.badges.find((x) => x.id === b)!;
 
   return (
-    <div className="game-board" ref={boardRef}>
+    <div className={`game-board phase-${phase}`} ref={boardRef}>
       <div className="game-tabs" role="group" aria-label="Choose a game">
         {ids.map((g) => (
           <button key={g} type="button" className={g === id ? "active" : ""} aria-pressed={g === id} onClick={() => choose(g)}>

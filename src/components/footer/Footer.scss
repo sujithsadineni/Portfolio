@@ -22,9 +22,10 @@
 
 .social-icons {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   text-align: center;
-  gap: 2rem;
+  gap: clamp(1rem, 5vw, 2rem); // 6 icons fit on 320px phones
   margin: 10px;
 
   a {

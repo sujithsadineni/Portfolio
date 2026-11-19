@@ -79,7 +79,7 @@ const PatchVulns: React.FC<GameProps> = ({ onFinish, paused }) => {
             ["exploited", exploited ? `${exploited} (${list(s.exploited)})` : "0"],
             ["npm audit", exploited ? `✗ ${exploited} got exploited` : "found 0 vulnerabilities ✓"],
           ],
-          link: { href: "#projects", label: "This game is based on my Dependency Watch project →" },
+          link: { href: "#projects", label: "This game is based on my Dependency Watch project\u00a0→" },
         });
         return;
       }
