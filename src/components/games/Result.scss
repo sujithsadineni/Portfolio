@@ -1,0 +1,198 @@
+// End-of-game screen (Split design)
+.rv {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  animation: popScore 0.4s ease both;
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+}
+
+.rv-score {
+  white-space: nowrap;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.rv-compare {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.rv-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+// shared action row
+.rv-actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 400px;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+  .rv-primary {
+    flex: 1;
+    border: none;
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+  .rv-secondary,
+  .rv-ghost {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    &:hover {
+      border-color: var(--accent);
+    }
+  }
+  .rv-ghost {
+    border-color: transparent;
+    background: transparent;
+    color: var(--text-muted);
+  }
+}
+
+// shared CTA bar
+.rv-cta {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    &:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  }
+}
+
+// ---------- 3 Split
+.rv-split {
+  .rv-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 10px;
+  }
+  .rv-panel {
+    position: relative;
+    border-radius: 12px;
+    padding: 18px 10px 12px;
+    background: var(--surface-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    &.best {
+      background: linear-gradient(160deg, rgba(245, 165, 36, 0.2), var(--surface-2) 70%);
+      border: 1px solid rgba(245, 165, 36, 0.5);
+    }
+  }
+  .rv-ribbon {
+    position: absolute;
+    top: -9px;
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: #f5a524;
+    color: #1a1d21;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+  .rv-list {
+    margin: 0;
+    padding: 4px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 5px 2px;
+      border-bottom: 1px dashed var(--border);
+      font-size: 0.85rem;
+    }
+    dt {
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    dd {
+      margin: 0;
+      font-weight: 600;
+      text-align: right;
+    }
+    .badge-row dd {
+      color: var(--gold);
+    }
+  }
+
+}
+
+// Narrow boards (phones): sized by the board, not the screen
+@container (max-width: 380px) {
+  .rv-score {
+    font-size: 2.2rem;
+  }
+  .rv-actions .rv-ghost .lbl,
+  .rv-cta .lbl {
+    display: none;
+  }
+  .rv-actions .rv-ghost {
+    padding: 0 10px;
+  }
+  .rv-split .rv-grid {
+    grid-template-columns: 1fr;
+  }
+  .rv-split .rv-panel {
+    padding: 16px 10px 10px;
+  }
+}

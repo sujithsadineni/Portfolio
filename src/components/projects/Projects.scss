@@ -2,107 +2,150 @@
   padding-top: 80px;
   padding-bottom: 2rem;
   text-align: center;
-  color: #fff;
+  color: var(--text);
   width: 80%;
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
 
   h2 {
     font-size: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .project-cards {
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
-    justify-content: center;
-    position: relative;
-    flex: 1;
-    min-height: 100%;
   }
 
   .project-card {
-    width: 260px;
-    padding: 1.5rem;
-    height: 180px;
+    height: 300px;
     perspective: 1200px;
     cursor: pointer;
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
 
     .card-inner {
       position: relative;
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      transition: transform 0.6s;
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     .card-front,
     .card-back {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      inset: 0;
+      box-sizing: border-box;
       backface-visibility: hidden;
       border-radius: 15px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 1rem;
-      background: #2c2f48;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      gap: 0.75rem;
+      padding: 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transition: border-color 0.3s ease;
     }
 
     .card-front {
-      font-size: 1.3rem;
-      font-weight: 600;
-      background: #1e1e1e;
-      border: 1px solid #333;
-      color: white;
-
-      &:hover {
-        border-color: #00ffc6;
+      h3 {
+        margin: 0;
+        font-size: 1.3rem;
+        font-weight: 600;
       }
+
+      .front-tags {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      .status {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: var(--accent-contrast);
+
+        &.wip {
+          background: transparent;
+          color: var(--accent);
+          border: 1px dashed var(--accent);
+        }
+      }
+    }
+
+    &:hover .card-front,
+    &.lead .card-front {
+      border-color: var(--accent);
     }
 
     .card-back {
       transform: rotateY(180deg);
-      flex-direction: column;
-      background: #1e1e1e;
-      border: 1px solid #333;
-      text-align: center;
+      justify-content: flex-start;
+      text-align: left;
+      overflow-y: auto;
 
       p {
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
+        margin: 1rem 0 0;
+        font-size: 0.88rem;
+        line-height: 1.5;
       }
 
-      .Project-links {
-        background-color: #00ffc6;
-        color: white;
-        padding: 10px 18px;
-        border-radius: 8px;
-        font-weight: bold;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        font-size: 0.95rem;
-        transition: background-color 0.3s ease;
+      .tags {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
 
-        &:hover {
-          opacity: 0.85;
+        li {
+          font-size: 0.72rem;
+          padding: 2px 8px;
+          border-radius: 999px;
+          background: var(--accent-soft);
+          color: var(--accent);
+        }
+      }
+
+      .project-links {
+        margin-top: auto;
+        display: flex;
+        gap: 0.75rem;
+
+        a {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 8px 14px;
+          border-radius: 8px;
+          font-size: 0.85rem;
+          font-weight: 600;
+          text-decoration: none;
+          background: var(--accent);
+          color: var(--accent-contrast);
+
+          &:hover {
+            opacity: 0.85;
+          }
         }
       }
 
       .close-button {
         position: absolute;
         top: 8px;
-        right: 12px;
+        right: 10px;
         background: none;
         border: none;
-        color: #fff;
+        color: var(--text);
         font-size: 1.2rem;
         cursor: pointer;
       }
@@ -114,9 +157,6 @@
   }
 
   @media (max-width: 768px) {
-    .project-cards {
-      flex-direction: column;
-      align-items: center;
-    }
+    width: 95%;
   }
 }

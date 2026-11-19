@@ -1,41 +1,8 @@
 import React, { useState } from "react";
-import "./Projects.scss";
 import { IoClose } from "react-icons/io5";
-
-const projects = [
-  {
-    title: "JavaScript Games",
-    description: "Fun browser-based games using HTML5 Canvas and JS logic.",
-    link: "https://github.com/your-username/js-games",
-  },
-  {
-    title: "AWS S3 Intergartion",
-    description: "I designed an application for uploading files into S3 bUcket",
-    link: "https://github.com/sujithsadineni/File-Upload-S3",
-  },
-  {
-    title: "House Renting website",
-    description:
-      "replica version on Sulekha.com with clean UI and More Advance Search Algorithm",
-    link: "https://github.com/your-username/dev-tools",
-  },
-  {
-    title: "Portfolio Website",
-    description: "Interactive personal portfolio built with React + SCSS.",
-    link: "https://sujithsadineni.github.io/Portfolio/",
-  },
-  {
-    title: "GitHub Automation",
-    description: "Automate GitHub workflows using custom Actions.",
-    link: "https://github.com/your-username/github-automation",
-  },
-  {
-    title: "MyPosts.com",
-    description:
-      " I designed a application for user interactive posts with autentication and authorization",
-    link: "https://github.com/sujithsadineni/Full-Stack",
-  },
-];
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { projects } from "../../data/content";
+import "./Projects.scss";
 
 const Projects: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -48,17 +15,26 @@ const Projects: React.FC = () => {
           const isActive = index === activeIndex;
           return (
             <div
-              key={index}
-              className={`project-card ${isActive ? "active" : ""}`}
+              key={project.title}
+              className={`project-card ${isActive ? "active" : ""} ${index === 0 ? "lead" : ""}`}
               onClick={() => setActiveIndex(isActive ? null : index)}
             >
               <div className="card-inner">
                 <div className="card-front">
+                  {project.status && (
+                    <span className={`status ${project.status === "In progress" ? "wip" : ""}`}>
+                      {project.status}
+                    </span>
+                  )}
                   <h3>{project.title}</h3>
+                  {project.tags.length > 0 && (
+                    <p className="front-tags">{project.tags.slice(0, 3).join(" · ")}</p>
+                  )}
                 </div>
                 <div className="card-back">
                   <button
                     className="close-button"
+                    aria-label="Close"
                     onClick={(e) => {
                       e.stopPropagation();
                       setActiveIndex(null);
@@ -67,15 +43,27 @@ const Projects: React.FC = () => {
                     <IoClose />
                   </button>
                   <p>{project.description}</p>
-                  <div className="Project-links">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View Project
-                    </a>
-                  </div>
+                  {project.tags.length > 0 && (
+                    <ul className="tags">
+                      {project.tags.map((t) => (
+                        <li key={t}>{t}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {(project.repo || project.live) && (
+                    <div className="project-links" onClick={(e) => e.stopPropagation()}>
+                      {project.repo && (
+                        <a href={project.repo} target="_blank" rel="noopener noreferrer">
+                          <FaGithub /> Code
+                        </a>
+                      )}
+                      {project.live && (
+                        <a href={project.live} target="_blank" rel="noopener noreferrer">
+                          <FaExternalLinkAlt /> Live
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

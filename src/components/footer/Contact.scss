@@ -2,7 +2,7 @@
   padding-top: 80px;
   padding-bottom: 2rem;
   text-align: center;
-  color: #ffffff;
+  color: var(--text);
   width: 80%;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
   h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: white;
+    color: var(--text);
   }
 
   .contact-form {
@@ -34,14 +34,16 @@
       padding: 0.75rem;
       margin-top: 0.4rem;
       border-radius: 8px;
-      border: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
       font-family: inherit;
       font-size: 1rem;
     }
 
     button {
-      background: #4ec9ae;
-      color: black;
+      background: var(--accent);
+      color: var(--accent-contrast);
       border: none;
       border-radius: 8px;
       padding: 0.75rem;
