@@ -2,9 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.png" />
+    <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sujith Sadineni Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    />
+    <script>
+      // Set theme before first paint (no flash). Saved choice wins, else OS setting.
+      try {
+        var t = localStorage.getItem("theme");
+      } catch (e) {}
+      document.documentElement.dataset.theme =
+        t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    </script>
   </head>
   <body>
     <div id="root"></div>

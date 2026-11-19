@@ -1,6 +1,5 @@
-// src/components/footer/Footer.tsx
-
 import React from "react";
+import { about, links, footer } from "../../data/content";
 import "./Footer.scss";
 import {
   FaInstagram,
@@ -14,18 +13,20 @@ import { SiGmail } from "react-icons/si";
 
 const Footer: React.FC = () => {
   return (
-    <footer id="contact" className="footer">
+    <footer className="footer">
       <div className="footer-content">
         <div className="social-icons">
           <a
-            href="https://www.instagram.com/sujith_sadineni/"
+            href={links.instagram}
+            aria-label="Instagram"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaInstagram />
           </a>
           <a
-            href="mailto:sujithsadineni@gmail.com"
+            href={links.email}
+            aria-label="Email"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -33,46 +34,46 @@ const Footer: React.FC = () => {
           </a>
 
           <a
-            href="https://github.com/sujithsadineni"
+            href={links.github}
+            aria-label="GitHub"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaGithub />
           </a>
           <a
-            href="https://www.linkedin.com/in/sujith-sadineni-508322209/"
+            href={links.linkedin}
+            aria-label="LinkedIn"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaLinkedinIn />
           </a>
           <a
-            href="https://www.youtube.com/@Sujithkumarsadineni"
+            href={links.youtube}
+            aria-label="YouTube"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaYoutube />
           </a>
           <a
-            href="https://www.reddit.com/user/E-11-EVN/"
+            href={links.reddit}
+            aria-label="Reddit"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaReddit />
           </a>
         </div>
-        <p>Sujith Sadineni's Portfolio.</p>
+        <p>{about.shortName}'s Portfolio.</p>
 
-        <p className="tech-used">
-          🛠 Built with React 19, confetti, Vite, TypeScript, EmailJS, SCSS, and
-          GitHub Pages
-        </p>
+        <p className="tech-used">{footer.techUsed}</p>
 
         <p className="copy-right">
-          © 2024 All rights reserved. Designed and Developed By <FaReact />{" "}
+          © {new Date().getFullYear()} All rights reserved. Designed and Developed By <FaReact />{" "}
           React , TypeScript and SCSS
         </p>
-        <p></p>
       </div>
     </footer>
   );

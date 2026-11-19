@@ -9,7 +9,7 @@
   align-items: center;
   padding: 15px 25px;
   backdrop-filter: blur(10px); /* Nice glassy effect */
-  // border-top: 1px solid #00ffc6;
+  // border-top: 1px solid var(--accent);
   z-index: 1;
 }
 
@@ -28,19 +28,19 @@
   margin: 10px;
 
   a {
-    color: white;
+    color: var(--text);
     font-size: 2rem;
     transition: all 0.3s;
 
     &:hover {
-      color: #00ffc6;
+      color: var(--accent);
       transform: scale(1.2);
     }
   }
 }
 
 p {
-  color: white;
+  color: var(--text);
   font-size: 1.2rem;
 }
 

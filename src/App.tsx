@@ -7,6 +7,7 @@ import Experience from "./components/experience/Experience";
 import Projects from "./components/projects/Projects";
 import ProfessionalExperience from "./components/experience/ProfessionalExperience";
 import Contact from "./components/footer/Contact";
+import KonamiEgg from "./components/games/KonamiEgg";
 const App: React.FC = () => {
   return (
     <>
@@ -17,6 +18,7 @@ const App: React.FC = () => {
       <Projects />
       <Contact />
       <Footer />
+      <KonamiEgg />
     </>
   );
 };

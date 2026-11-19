@@ -1,6 +1,51 @@
+// Theme tokens. data-theme is set in index.html before first paint.
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #242424;
+  --surface: #1e1e1e;
+  --surface-2: #292929;
+  --border: #333;
+  --text: #fff;
+  --text-muted: #ccc;
+  --accent: #00ffc6;
+  --accent-contrast: #000;
+  --accent-glow: rgba(0, 255, 198, 0.3);
+  --accent-soft: rgba(0, 255, 198, 0.1);
+  --focus: #fff;
+  --danger: #ff6b6b;
+  --warn: #f59e0b;
+  --gold: #f5a524;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f7f9;
+  --surface: #fff;
+  --surface-2: #eef0f3;
+  --border: #d9dde3;
+  --text: #1a1d21;
+  --text-muted: #4a5058;
+  --accent: #00806a; // darker teal: 4.9:1 on white
+  --accent-contrast: #fff;
+  --accent-glow: rgba(0, 128, 106, 0.25);
+  --accent-soft: rgba(0, 128, 106, 0.08);
+  --focus: #1a1d21;
+  // darker status colours so text stays ≥ 4.5:1 on light surfaces
+  --danger: #c4262e;
+  --warn: #b45309;
+  --gold: #a15c00;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: rgb(36, 36, 36);
-  color: white;
+  background-color: var(--bg);
+  color: var(--text);
   margin: 0;
   font-family: "Poppins", sans-serif;
 }
@@ -9,30 +54,56 @@ html {
   scroll-behavior: smooth;
 }
 
-/* About.scss, Experience.scss, Projects.scss, Clients.scss */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
 
 section {
-  position: relative; /* Changed from fixed/absolute to relative */
-  margin: 10px auto; /* Center the navbar */
+  position: relative;
+  margin: 10px auto;
   width: 90%;
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the content horizontally */
-  flex-direction: column; /* Stack items vertically */
+  justify-content: center;
+  flex-direction: column;
   align-content: center;
   padding: 15px 25px;
-  // background: rgba(20, 20, 20, 0.9);
-  backdrop-filter: blur(10px); /* Nice glassy effect */
-  // border-radius: 16px;
-  // border: 1px solid white;
+  backdrop-filter: blur(10px);
 }
 
 h1 {
-  color: white;
+  color: var(--text);
   margin-bottom: 10px;
 }
 
 p {
-  color: white;
+  color: var(--text);
 }
-/* global.scss - ADD this at bottom */
+
+// Theme switch: one crossfade of the whole page, everything at the same time.
+// Per-element transitions are paused so nothing lags behind the snapshot.
+html.vt-theme *,
+html.vt-theme *::before,
+html.vt-theme *::after {
+  transition: none !important;
+}
+html.vt-theme::view-transition-group(*),
+html.vt-theme::view-transition-old(*),
+html.vt-theme::view-transition-new(*) {
+  animation-duration: 0.35s;
+  animation-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
