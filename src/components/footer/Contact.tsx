@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { contact } from "../../data/content";
 import "./Contact.scss";
 
 const SERVICE_ID = "service_gx6r4el";
 const TEMPLATE_ID = "template_ffdcgvb";
 const PUBLIC_KEY = "XxxOqOMQnWaRE2d0H";
 
+const empty = { name: "", email: "", subject: "", message: "" };
+
 const Contact: React.FC = () => {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [form, setForm] = useState(empty);
+  const [sending, setSending] = useState(false);
+  const busy = useRef(false); // blocks a 2nd submit before React re-renders the disabled button
 
   const [status, setStatus] = useState<{
     type: "success" | "error";
@@ -27,6 +27,9 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (busy.current) return;
+    busy.current = true;
+    setSending(true);
     setStatus(null);
 
     const payload = {
@@ -37,15 +40,15 @@ const Contact: React.FC = () => {
     emailjs
       .send(SERVICE_ID, TEMPLATE_ID, payload, PUBLIC_KEY)
       .then(() => {
-        setStatus({ type: "success", message: "Message sent successfully!" });
-        setForm({ name: "", email: "", subject: "", message: "" });
-        setTimeout(() => setStatus(null), 5000);
+        setStatus({ type: "success", message: contact.success });
+        setForm(empty);
       })
       .catch(() => {
-        setStatus({
-          type: "error",
-          message: "Something went wrong. Please try again.",
-        });
+        setStatus({ type: "error", message: contact.error });
+      })
+      .finally(() => {
+        busy.current = false;
+        setSending(false);
         setTimeout(() => setStatus(null), 5000);
       });
   };
@@ -53,30 +56,32 @@ const Contact: React.FC = () => {
   return (
     <>
       <section id="contact" className="contact-section">
-        <h2>📬 Contact Me</h2>
+        <h2>{contact.heading}</h2>
         <form onSubmit={handleSubmit} className="contact-form">
           <label>
-            Your Name
+            {contact.fields.name}
             <input
               type="text"
               name="name"
+              autoComplete="name"
               value={form.name}
               onChange={handleChange}
               required
             />
           </label>
           <label>
-            Your Email
+            {contact.fields.email}
             <input
               type="email"
               name="email"
+              autoComplete="email"
               value={form.email}
               onChange={handleChange}
               required
             />
           </label>
           <label>
-            Subject
+            {contact.fields.subject}
             <input
               type="text"
               name="subject"
@@ -86,7 +91,7 @@ const Contact: React.FC = () => {
             />
           </label>
           <label>
-            Message
+            {contact.fields.message}
             <textarea
               name="message"
               rows={5}
@@ -95,12 +100,17 @@ const Contact: React.FC = () => {
               required
             />
           </label>
-          <button type="submit">Send Message</button>
+          <button type="submit" disabled={sending} aria-busy={sending}>
+            {sending ? contact.sending : contact.send}
+          </button>
         </form>
       </section>
-      {status && (
-        <div className={`custom-alert ${status.type}`}>{status.message}</div>
-      )}
+      {/* live region stays mounted so screen readers announce the message when it appears */}
+      <div role="status" aria-live="polite">
+        {status && (
+          <div className={`custom-alert ${status.type}`}>{status.message}</div>
+        )}
+      </div>
     </>
   );
 };

@@ -422,7 +422,18 @@ export const games = {
   },
 };
 
+export const contact = {
+  heading: "📬 Contact Me",
+  fields: { name: "Your Name", email: "Your Email", subject: "Subject", message: "Message" },
+  send: "Send Message",
+  sending: "Sending…",
+  success: "Message sent successfully!",
+  error: "Something went wrong. Please try again.",
+};
+
 export const footer = {
+  social: { instagram: "Instagram", email: "Email", github: "GitHub", linkedin: "LinkedIn", youtube: "YouTube", reddit: "Reddit" },
+  copyright: (year: number) => `© ${year} ${about.name}`,
   techUsed:
     "🛠 Built with React 19, confetti, Vite, TypeScript, EmailJS, SCSS, and GitHub Pages",
 };

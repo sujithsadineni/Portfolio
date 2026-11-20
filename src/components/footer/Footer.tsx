@@ -1,79 +1,43 @@
 import React from "react";
-import { about, links, footer } from "../../data/content";
+import { links, footer } from "../../data/content";
 import "./Footer.scss";
 import {
   FaInstagram,
   FaGithub,
   FaLinkedinIn,
   FaYoutube,
-  FaReact,
   FaReddit,
 } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
+
+const social = [
+  ["instagram", FaInstagram],
+  ["email", SiGmail],
+  ["github", FaGithub],
+  ["linkedin", FaLinkedinIn],
+  ["youtube", FaYoutube],
+  ["reddit", FaReddit],
+] as const;
 
 const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
         <div className="social-icons">
-          <a
-            href={links.instagram}
-            aria-label="Instagram"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaInstagram />
-          </a>
-          <a
-            href={links.email}
-            aria-label="Email"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <SiGmail />
-          </a>
-
-          <a
-            href={links.github}
-            aria-label="GitHub"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaGithub />
-          </a>
-          <a
-            href={links.linkedin}
-            aria-label="LinkedIn"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaLinkedinIn />
-          </a>
-          <a
-            href={links.youtube}
-            aria-label="YouTube"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaYoutube />
-          </a>
-          <a
-            href={links.reddit}
-            aria-label="Reddit"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaReddit />
-          </a>
+          {social.map(([key, Icon]) => (
+            <a
+              key={key}
+              href={links[key]}
+              aria-label={footer.social[key]}
+              // mailto opens the mail app; a new tab would just stay blank
+              {...(key !== "email" && { target: "_blank", rel: "noopener noreferrer" })}
+            >
+              <Icon />
+            </a>
+          ))}
         </div>
-        <p>{about.shortName}'s Portfolio.</p>
-
+        <p className="copy-right">{footer.copyright(new Date().getFullYear())}</p>
         <p className="tech-used">{footer.techUsed}</p>
-
-        <p className="copy-right">
-          © {new Date().getFullYear()} All rights reserved. Designed and Developed By <FaReact />{" "}
-          React , TypeScript and SCSS
-        </p>
       </div>
     </footer>
   );
