@@ -12,6 +12,7 @@ import {
   FaJenkins,
 } from "react-icons/fa";
 import { RiNextjsFill } from "react-icons/ri";
+import { LuBot, LuBrainCircuit } from "react-icons/lu";
 import { SiApachekafka } from "react-icons/si";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
@@ -69,84 +70,113 @@ export const popSound = asset("pop.mp3");
 export type Expertise = {
   title: string;
   icons: IconType[];
-  short: string;
+  short: string; // comma-separated → tech chips
+  lead: string; // one-line summary
   details: string[];
 };
 
+// Facts only (rule J): AI items are verified against the public cashflow repo
+// (api/src/assistant/claude.js + README); the rest restate the original text.
 export const expertise = {
   subtitle:
-    "Based on 7+ years of experience as a Full-Stack Developer with React, Node, Java, SpringBoot & AWS.",
+    "7+ years across the stack: React and TypeScript, Java and Node.js services, AWS, and now LLM-powered features.",
   items: [
+    {
+      title: "AI Engineering & LLM Apps",
+      icons: [LuBrainCircuit, LuBot],
+      short: "Claude API, Tool use, Agent loops, Zod validation, Prompt caching, Claude Code",
+      lead: "I ship LLM features that are grounded in real data, checkable, private by default and cost-aware.",
+      details: [
+        "Built \"Ask Claude\" in cashflow (open source): an assistant that answers spending questions through Claude tool use over the app's own read-only queries.",
+        "Grounded every answer: the system prompt forbids estimated figures, and every lookup the model made is shown so the answer can be checked.",
+        "Wrote a capped, auditable tool loop with Zod-validated tool inputs and server-side model fallback, instead of a black-box agent runner.",
+        "Kept it cheap and fast with prompt caching and per-request token cost tracking.",
+        "Designed for privacy: AI is opt-in per question or statement, only the needed fields are sent, and card numbers never leave the machine.",
+        "Develop AI-assisted with Claude Code, using project rule files (CLAUDE.md / AGENTS.md) and custom skills that automate testing, audits and reviews.",
+      ],
+    },
     {
       title: "Frontend Development",
       icons: [FaReact, FaAngular, RiNextjsFill],
-      short: "React, Angular, Next.js, Redux, Hooks, UI/UX Design",
+      short: "React, Next.js, Angular, TypeScript, Redux, Accessibility",
+      lead: "Fast, accessible interfaces that hold up on every screen size.",
       details: [
-        "Developed responsive SPAs using React.js, Angular, and Next.js.",
-        "Leveraged Redux, React Hooks, and SCSS/Tailwind for modular, accessible UI.",
-        "Optimized load time via lazy loading, virtual DOM, and bundle splitting.",
-        "Collaborated with UI/UX teams to ensure WCAG compliance and mobile responsiveness.",
-        "Delivered testable components with RTL, Jest, and Cypress.",
+        "Build responsive single-page apps in React and TypeScript: React, Hooks and Redux at NC DHHS, React with SASS at Morgan Stanley, and React with Hooks at Cognizant.",
+        "Deliver Angular and Next.js applications alongside React, choosing the framework that fits the product.",
+        "Keep large UIs maintainable with Redux, custom hooks and modular SCSS/Tailwind component styles.",
+        "Cut load times with code splitting, lazy loading and memoization, and keep bundles lean by removing unused dependencies.",
+        "Build accessible, mobile-first interfaces with UX teams: this portfolio meets WCAG AA contrast in both themes and works fully by keyboard.",
+        "Use modern browser APIs (View Transitions, IntersectionObserver, container queries) for smooth, responsive UI without heavy libraries.",
       ],
     },
     {
       title: "Backend Development",
       icons: [FaNodeJs, FaJava],
-      short: "Node.js, Java, Express, Spring Boot, GraphQL, REST APIs",
+      short: "Java, Spring Boot, Node.js, Express, GraphQL, REST",
+      lead: "Secure, well-structured APIs and services that scale.",
       details: [
-        "Built secure and scalable REST/GraphQL APIs using Node.js, Express, Java, and Spring Boot.",
-        "Integrated Prisma, JPA, and Hibernate for ORM-based database access.",
-        "Applied JWT/OAuth for stateless authentication and secure API layers.",
-        "Developed custom middleware for logging, validation, and versioning.",
-        "Ensured performance via async patterns, schema optimization, and SQL tuning.",
+        "Design REST and GraphQL APIs: GraphQL services in Java/Spring Boot at Cognizant, Node.js/Express APIs at NC DHHS.",
+        "Delivered secure microservices at Morgan Stanley with Node.js, Prisma ORM and PostgreSQL.",
+        "Model data across PostgreSQL and MySQL with JPA/Hibernate, Prisma, Knex and Sequelize.",
+        "Secure APIs with JWT/OAuth stateless authentication and bcrypt password hashing.",
+        "Handle file uploads end to end: GraphQL multipart uploads stored in AWS S3 (File Upload S3 project).",
+        "Add middleware for logging, validation and versioning; validate payloads with Zod and log with pino in cashflow.",
       ],
     },
     {
       title: "Cloud & DevOps",
       icons: [FaAws, SiApachekafka],
-      short: "AWS, ECS, EC2, S3, CI/CD, Secrets Manager",
+      short: "AWS, ECS, EC2, S3, CloudWatch, CI/CD",
+      lead: "Automated delivery and observable infrastructure on AWS.",
       details: [
-        "Deployed microservices using ECS, EC2, and Docker.",
-        "Automated CI/CD pipelines via Jenkins, GitHub Actions, and AWS CodePipeline.",
-        "Secured configuration using AWS Secrets Manager and IAM roles.",
-        "Provisioned scalable infrastructure with VPC, S3, CloudWatch, and ELB.",
-        "Implemented centralized monitoring using CloudWatch and ELK Stack.",
+        "Run containerised services on AWS ECS and EC2, with CI/CD in Jenkins, at NC DHHS.",
+        "Led CI/CD workflows at Morgan Stanley with Jenkins and AWS CodePipeline; also automate with GitHub Actions.",
+        "Monitor production with CloudWatch and the ELK Stack for centralised logs and alerts.",
+        "Protect configuration with AWS Secrets Manager and least-privilege IAM roles.",
+        "Provision scalable infrastructure with VPC, S3 and Elastic Load Balancing.",
+        "AWS Certified Solutions Architect: design for availability, security and cost from the start.",
       ],
     },
     {
-      title: "Containerization",
+      title: "Containers & Orchestration",
       icons: [FaDocker, FaJenkins],
-      short: "Docker, Kubernetes, EKS, CI/CD",
+      short: "Docker, Kubernetes, EKS, Helm",
+      lead: "Portable, repeatable environments from laptop to production.",
       details: [
-        "Containerized frontend and backend apps using Docker.",
-        "Managed deployments using Kubernetes and AWS EKS clusters.",
-        "Created Dockerfiles and Helm charts for efficient orchestration.",
-        "Integrated containers into CI/CD workflows for consistent delivery.",
-        "Improved portability, rollback strategies, and environment parity.",
+        "Containerise React front ends and Java/Node.js services with Docker.",
+        "Shipped containerised releases through Docker and Jenkins CI/CD pipelines at Cognizant.",
+        "Run and roll out workloads on Kubernetes and AWS EKS clusters.",
+        "Package deployments with Dockerfiles and Helm charts for repeatable releases.",
+        "Plan rollbacks and keep development, staging and production environments in parity.",
+        "Use the same container images across environments to remove 'works on my machine' issues.",
       ],
     },
     {
-      title: "Performance Optimization",
+      title: "Performance & Scale",
       icons: [FaBolt],
-      short: "Lazy loading, useCallback, indexing, tuning",
+      short: "Kafka, Code splitting, Memoization, SQL indexing, Grafana",
+      lead: "Finding bottlenecks and removing them, front to back.",
       details: [
-        "Used code-splitting, lazy loading, and memoization for frontend performance.",
-        "Optimized backend using indexed SQL queries and tuned database schema.",
-        "Integrated Kafka for async processing and improved throughput.",
-        "Monitored app health with Prometheus and Grafana dashboards.",
-        "Resolved bottlenecks in core banking and analytics modules.",
+        "Tune React apps with code splitting, lazy loading and memoization.",
+        "Improved backend performance with Express middleware and PostgreSQL indexing during my MS projects.",
+        "Speed up queries with indexing, schema tuning and SQL optimisation.",
+        "Move heavy work to asynchronous processing with Kafka for better throughput.",
+        "Resolved performance bottlenecks in core banking and analytics modules.",
+        "Keep pages light: this site's images went from 1.2 MB to about 127 KB, and unused dependencies were removed.",
       ],
     },
     {
       title: "Testing & Quality",
       icons: [FaVial],
-      short: "Jest, RTL, JUnit, Mockito, Cypress, Sonar",
+      short: "Jest, RTL, Cypress, JUnit, Mockito, SonarQube",
+      lead: "Quality built in, not bolted on.",
       details: [
-        "Ensured frontend quality with Jest, RTL, and Cypress.",
-        "Wrote robust backend tests using JUnit and Mockito.",
-        "Maintained high test coverage across services and components.",
-        "Used SonarQube for static analysis and enforcing code standards.",
-        "Practiced TDD, peer reviews, and tested real-world user flows.",
+        "Test UIs with Jest and React Testing Library; maintained RTL-tested React apps at Morgan Stanley.",
+        "Cover user journeys end to end with Cypress.",
+        "Test Java services with JUnit and Mockito.",
+        "Enforce standards with SonarQube static analysis and high test coverage across services.",
+        "Practise TDD and thorough peer code reviews.",
+        "Verify UI changes with scripted headless-Chrome checks for layout, themes and accessibility.",
       ],
     },
   ] as Expertise[],

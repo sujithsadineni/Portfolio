@@ -40,7 +40,8 @@
   }
 }
 
-p {
+// scoped to the footer (was a global rule that enlarged every <p> on the page)
+.footer p {
   color: var(--text);
   font-size: 1.2rem;
 }
