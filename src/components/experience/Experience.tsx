@@ -1,16 +1,8 @@
-import React, { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaChevronDown, FaCheck } from "react-icons/fa";
 import { expertise, Expertise } from "../../data/content";
+import { useIsPhone } from "../../utils/useIsPhone";
 import "./Experience.scss";
-
-// Desktop shows tabs, phones show an accordion.
-const PHONE = "(max-width: 860px)";
-const subscribe = (cb: () => void) => {
-  const m = matchMedia(PHONE);
-  m.addEventListener("change", cb);
-  return () => m.removeEventListener("change", cb);
-};
-const useIsPhone = () => useSyncExternalStore(subscribe, () => matchMedia(PHONE).matches);
 
 const chips = (it: Expertise) =>
   it.short

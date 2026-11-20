@@ -1,157 +1,503 @@
-.journey-section {
-  padding-top: 80px;
+// My Journey: Road on desktop, Metro on phones (switch at 860px in useIsPhone).
+.js {
+  width: 100%;
+  max-width: 1100px;
+  padding: 80px 24px 40px;
   color: var(--text);
-  text-align: center;
-  width: 80%;
+  text-align: left;
+  align-items: stretch; // global section rule centres children
 
-  h2 {
+  > h2 {
+    margin: 0;
+    text-align: center;
     font-size: 2rem;
-    margin-bottom: 3rem;
   }
-
-  @media (max-width: 480px) {
-    width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
+  .js-sub {
+    margin: 8px 0 40px;
+    text-align: center;
+    color: var(--text-muted);
+  }
+  @media (max-width: 768px) {
+    padding: 64px 16px 32px;
   }
 }
 
-.timeline {
-  position: relative;
-  max-width: 1000px;
-  margin: auto;
+// ---- shared card
+.js-card {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.4s ease;
 
-  &::before {
+  &.kind-now {
+    border: 1px solid transparent;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(120deg, var(--accent), #6366f1) border-box;
+  }
+}
+.js-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+}
+.js-logo {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 3px;
+}
+.js-flag {
+  display: grid;
+  place-items: center;
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #fff;
+  font-size: 1.2rem;
+}
+.js-company {
+  margin: 2px 0 0;
+  font-weight: 600;
+  color: var(--accent);
+}
+.js-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 12px 0 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.js-now,
+.js-edu {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+}
+.js-now {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+}
+.js-edu {
+  border: 1px solid var(--border);
+}
+.js-points {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  display: grid;
+  gap: 5px;
+  li {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    &::marker {
+      color: var(--accent);
+    }
+  }
+}
+.js-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  span {
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+}
+
+// ---------- 1 Road
+.road-wrap {
+  position: relative;
+}
+.road {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+  path {
+    fill: none;
+  }
+  // wooden sleepers across the track
+  .sleepers {
+    stroke: color-mix(in srgb, var(--text-muted) 45%, transparent);
+    stroke-width: 22;
+    stroke-dasharray: 4 9;
+  }
+  // grey rails, then coloured rails drawn in as you scroll
+  .rails,
+  .road-line {
+    stroke-width: 14;
+  }
+  .rails {
+    stroke: color-mix(in srgb, var(--text-muted) 70%, transparent);
+  }
+  .road-line {
+    stroke: var(--accent);
+    stroke-dasharray: 1;
+    filter: drop-shadow(0 0 4px var(--accent-glow));
+  }
+}
+
+// model train (top-down, lit from above-left): each car is centred on the track and turned with it
+.model-train {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  > span:not(.mt-smoke) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    will-change: transform;
+    // bogies peeking out on both sides
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      height: 4px;
+      border-radius: 2px;
+      background: #111827;
+    }
+    &::before {
+      top: -3px;
+    }
+    &::after {
+      bottom: -3px;
+    }
+  }
+}
+
+// ---- wagon: flat bed + a crate on top with the stop's icon
+.mt-wagon {
+  width: 34px;
+  height: 20px;
+  margin: -10px 0 0 -17px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #9ca3af, #4b5563);
+  border: 1px solid #374151;
+  box-shadow: 2px 5px 8px rgba(0, 0, 0, 0.35);
+  animation: wagon-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+// box: starts on its card, flies to its wagon as you scroll (app colour, raised look)
+.mt-box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 65%, #fff), var(--accent) 55%, color-mix(in srgb, var(--accent) 70%, #000));
+  box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.25), inset 2px 2px 0 rgba(255, 255, 255, 0.35), 2px 3px 5px rgba(0, 0, 0, 0.3);
+  z-index: 4;
+  will-change: transform;
+  &.flying {
+    box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.25), inset 2px 2px 0 rgba(255, 255, 255, 0.35), 6px 14px 14px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// ---- engine: boiler cylinder (shaded), raised cab, chimney, headlamp
+.mt-loco {
+  width: 46px;
+  height: 24px;
+  margin: -12px 0 0 -23px;
+  border-radius: 6px 12px 12px 6px;
+  background: #1e1b4b; // chassis
+  box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.45);
+  i {
+    position: absolute;
+  }
+  // round boiler: light on top, dark underneath → reads as a cylinder
+  .mt-boiler {
+    left: 14px;
+    right: 1px;
+    top: 3px;
+    bottom: 3px;
+    border-radius: 3px 10px 10px 3px;
+    background: linear-gradient(180deg, #a5b4fc 0%, #6366f1 35%, #4338ca 65%, #1e1b4b 100%);
+  }
+  // cab at the back, raised: lit roof + darker sides
+  .mt-cab {
+    left: 1px;
+    top: 1px;
+    width: 15px;
+    height: 22px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #c7d2fe, #818cf8 50%, #3730a3);
+    box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3), 2px 0 3px rgba(0, 0, 0, 0.35);
+  }
+  // chimney: looking down into it
+  .mt-chimney {
+    right: 10px;
+    top: 7px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #000 30%, #374151 55%, #9ca3af 75%);
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.4);
+  }
+  // headlamp at the front (direction of travel)
+  .mt-lamp {
+    right: -2px;
+    top: 8px;
+    width: 4px;
+    height: 8px;
+    border-radius: 2px;
+    background: #fde68a;
+    box-shadow: 0 0 12px 5px rgba(253, 230, 138, 0.6);
+  }
+}
+
+// ---- smoke burst each time the train passes a stop
+.mt-smoke {
+  position: absolute;
+  left: 0;
+  top: 0;
+  i {
+    position: absolute;
+    left: -8px;
+    top: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--text-muted) 55%, transparent);
+    animation: puff 1.4s ease-out both;
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+      --dx: -18px;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+      --dx: 16px;
+    }
+  }
+}
+@keyframes puff {
+  0% {
+    opacity: 0.9;
+    transform: translate(0, 0) scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx, 0), -46px) scale(2.4);
+  }
+}
+// wagon only fades (scaling it would also scale its on-track position); the crate pops
+@keyframes wagon-in {
+  from {
+    opacity: 0;
+  }
+}
+
+
+.road-stops {
+  position: relative;
+  margin: 0;
+  padding: 40px 0;
+  list-style: none;
+  display: grid;
+  gap: 56px;
+}
+.road-stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 260px 1fr; // road weaves ±70px: markers must never reach the cards
+  align-items: center;
+
+  .road-marker {
+    grid-column: 2;
+    justify-self: center;
+    z-index: 2;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 2px solid var(--border);
+    background: var(--bg);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  // marker sits on the road: road weaves ±70px around the centre
+  &.left .road-marker {
+    transform: translateX(-70px);
+  }
+  &.right .road-marker {
+    transform: translateX(70px);
+  }
+  .js-card {
+    opacity: 0.25;
+    transform: translateY(20px) scale(0.97);
+  }
+  &.left .js-card {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  &.right .js-card {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  &.reached {
+    .road-marker {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--accent-contrast);
+      box-shadow: 0 0 0 6px var(--accent-soft);
+    }
+    .js-card {
+      opacity: 1;
+      transform: none;
+      &:hover {
+        border-color: var(--accent);
+        transform: translateY(-3px);
+      }
+    }
+  }
+
+}
+
+// ---------- 2 Metro (phones): horizontal line fixed under the navbar
+.metro {
+  display: grid;
+  gap: 16px;
+}
+.metro-map {
+  position: sticky;
+  top: 60px;
+  z-index: 5;
+  padding: 14px 18px 30px;
+  margin: 0 -16px;
+  background: var(--bg); // solid: cards scroll underneath
+  border-bottom: 1px solid var(--border);
+}
+.metro-line {
+  --t: 0;
+  position: relative;
+  height: 8px;
+  margin: 8px 6px 0;
+
+  &::before,
+  .metro-fill {
     content: "";
     position: absolute;
-    width: 4px;
-    background: var(--accent);
+    left: 0;
     top: 0;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    height: 8px;
+    border-radius: 8px;
+  }
+  &::before {
+    right: 0;
+    background: var(--border);
+  }
+  .metro-fill {
+    width: calc(var(--t) * 100%);
+    background: linear-gradient(90deg, var(--accent), #6366f1);
+    transition: width 0.25s linear;
   }
 }
-
-.timeline-item {
-  position: relative;
-  width: 50%;
-  padding: 2rem 2rem;
-  box-sizing: border-box;
+.train {
+  position: absolute;
+  left: calc(var(--t) * 100%);
+  top: 4px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 0.9rem;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
+  z-index: 3;
+  transition: left 0.25s linear;
+}
+.station {
+  position: absolute;
+  left: calc(var(--s) * 100%);
+  top: 4px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font: inherit;
+  cursor: pointer;
 
   .dot {
     width: 16px;
     height: 16px;
-    background: var(--accent);
     border-radius: 50%;
+    border: 3px solid var(--border);
+    background: var(--bg);
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .label {
     position: absolute;
-    top: 24px;
-    right: -8px;
-    z-index: 1;
-  }
-
-  &.right .dot {
-    left: -8px;
-    right: auto;
-  }
-
-  .content {
-    background: var(--surface);
-    border-radius: 12px;
-    padding: 1rem;
-    text-align: left;
-    box-shadow: 0 0 15px var(--accent-soft);
+    top: 18px;
     display: flex;
     flex-direction: column;
-
-    border: 1px solid var(--border);
-
-    &:hover {
-      border-color: var(--accent);
-      transform: translateY(-5px);
+    align-items: center;
+    b {
+      font-size: 0.68rem;
+      white-space: nowrap;
     }
-    &.active {
-      width: 100%;
-      background-color: var(--surface-2);
-      border-color: var(--accent);
-    }
-
-    .date {
-      color: var(--text-muted);
-      font-weight: bold;
-      text-align: right;
-    }
-
-    .card {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      align-items: center;
-
-      img {
-        width: 70px;
-        height: 70px;
-        object-fit: contain;
-        border-radius: 4px;
-        background: #fff;
-      }
-
-      h3 {
-        margin: 0;
-        font-size: 1.1rem;
-      }
-
-      .company {
-        margin-top: 4px;
-        font-size: 1.2rem;
-        color: var(--accent);
-      }
+    small {
+      display: none;
     }
   }
-}
-.description {
-  font-size: 0.95rem;
-  margin: 0.3rem 0;
-  color: var(--text-muted);
-}
-.timeline-item.left {
-  left: 0;
-  text-align: right;
-
-  .content {
-    margin-right: auto;
+  &.passed .dot {
+    border-color: var(--accent);
   }
-}
-
-.timeline-item.right {
-  left: 50%;
-
-  .content {
-    margin-left: auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .timeline::before {
-    left: 8px;
-  }
-
-  .timeline-item {
-    width: 100%;
-    padding-left: 2.5rem;
-    padding-right: 0;
-
-    &.right {
-      left: 0;
-      right: 0;
-    }
-
+  &.here {
+    color: var(--text);
     .dot {
-      left: 0;
-    }
-
-    .content {
-      margin: 0;
+      background: var(--accent);
+      transform: scale(1.2);
+      box-shadow: 0 0 0 6px var(--accent-soft);
     }
   }
 }
+.metro-cards {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 28px;
+  li {
+    .js-card {
+      opacity: 0.45;
+      transform: scale(0.98);
+    }
+    &.active .js-card {
+      opacity: 1;
+      transform: none;
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+  }
+}
+

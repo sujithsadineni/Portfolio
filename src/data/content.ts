@@ -182,48 +182,87 @@ export const expertise = {
   ] as Expertise[],
 };
 
-export const timeline = [
+export type TimelineItem = {
+  date: string;
+  title: string;
+  company: string;
+  logo: string;
+  kind: "work" | "edu";
+  start: string; // "YYYY-MM" (work) or "YYYY" (edu)
+  end: string | null; // null = present
+  highlights: string[];
+  tags: string[];
+};
+
+// highlights/tags restate the original role descriptions (facts only)
+export const timeline: TimelineItem[] = [
   {
     date: "May 2025 – Present",
     title: "Senior Full-Stack Developer",
     company: "NC DHHS",
     logo: asset("nc-state.jpg"),
-    description:
-      "Designed SPAs with React, Hooks, and Redux. Built scalable APIs with Node.js/Express, implemented JWT auth, CI/CD using Jenkins, AWS ECS, and monitored apps with CloudWatch and ELK Stack.",
+    kind: "work",
+    start: "2025-05",
+    end: null,
+    highlights: ["Designed single-page apps with React, Hooks and Redux.", "Built scalable APIs with Node.js/Express and implemented JWT authentication.", "Set up CI/CD with Jenkins and AWS ECS.", "Monitored applications with CloudWatch and the ELK Stack."],
+    tags: ["React", "Redux", "Node.js", "Express", "JWT", "Jenkins", "AWS ECS", "CloudWatch", "ELK"],
   },
   {
     date: "Dec 2022 – May 2025",
     title: "Senior Full-Stack Developer",
     company: "Morgan Stanley",
     logo: asset("morgan.jpeg"),
-    description:
-      "Delivered secure microservices using Node.js, Prisma ORM, and PostgreSQL. Led CI/CD workflows via Jenkins and AWS CodePipeline. Maintained SPAs using React, SASS, and RTL.",
+    kind: "work",
+    start: "2022-12",
+    end: "2025-05",
+    highlights: ["Delivered secure microservices with Node.js, Prisma ORM and PostgreSQL.", "Led CI/CD workflows with Jenkins and AWS CodePipeline.", "Maintained single-page apps built with React, SASS and React Testing Library."],
+    tags: ["Node.js", "Prisma", "PostgreSQL", "Jenkins", "CodePipeline", "React", "SASS", "RTL"],
   },
   {
     date: "2022 – 2024",
     title: "Master's In Computer Science",
     company: "Southern Arkansas University",
     logo: asset("sau.png"),
-    description:
-      "Completed MS in Computer Science. Built full-stack apps with React, GraphQL, Node.js. Improved backend performance with Express middleware and PostgreSQL indexing.",
+    kind: "edu",
+    start: "2022",
+    end: "2024",
+    highlights: ["Completed an MS in Computer Science.", "Built full-stack apps with React, GraphQL and Node.js.", "Improved backend performance with Express middleware and PostgreSQL indexing."],
+    tags: ["React", "GraphQL", "Node.js", "Express", "PostgreSQL"],
   },
   {
     date: "Apr 2019 – Aug 2022",
     title: "Full-Stack Developer",
     company: "Cognizant",
     logo: asset("Cognizant-Logo.png"),
-    description:
-      "Developed scalable SPAs using React.js and Hooks. Built GraphQL APIs with Java Spring Boot. Focused on accessibility, modular styling (SCSS), and CI/CD with Docker & Jenkins.",
+    kind: "work",
+    start: "2019-04",
+    end: "2022-08",
+    highlights: ["Developed scalable single-page apps with React and Hooks.", "Built GraphQL APIs with Java Spring Boot.", "Focused on accessibility and modular SCSS styling.", "Shipped through CI/CD with Docker and Jenkins."],
+    tags: ["React", "Java", "Spring Boot", "GraphQL", "SCSS", "Docker", "Jenkins"],
   },
   {
     date: "2015 – 2019",
     title: "B.E in Computer Science",
     company: "St Joseph's College Of Engineering",
     logo: asset("st.joseph.logo.png"),
-    description:
-      "Graduated in Computer Science. Gained strong foundation in Java, OOP, data structures, and participated in web and full-stack development internships.",
+    kind: "edu",
+    start: "2015",
+    end: "2019",
+    highlights: ["Graduated in Computer Science.", "Built a strong foundation in Java, OOP and data structures.", "Took part in web and full-stack development internships."],
+    tags: ["Java", "OOP", "Data structures"],
   },
 ];
+
+// Last stop of the journey (facts: both projects are on this site / GitHub)
+export const journeyToday = {
+  title: "Still building",
+  company: "AI-powered products & open source",
+  highlights: [
+    "cashflow: an open-source, local-first finance app with a grounded Claude assistant.",
+    "Dependency Watch: automatic vulnerability-fix and version-upgrade detection (in progress).",
+  ],
+  tags: ["Claude API", "React", "Node.js", "PostgreSQL", "Open source"],
+};
 
 export type Project = {
   title: string;
