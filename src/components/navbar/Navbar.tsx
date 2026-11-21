@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { about, links } from "../../data/content";
 import { sections, useActiveSection, useMenu, useScroll } from "./navHooks";
@@ -10,6 +10,12 @@ const Navbar: React.FC = () => {
   const active = useActiveSection();
   const { scrolled } = useScroll();
   const menu = useMenu(true);
+
+  // tab title follows the section on screen: "Sujith Sadineni" at the top, "Sujith Sadineni · Projects" further down
+  useEffect(() => {
+    const label = active === "about" ? "" : sections.find(([id]) => id === active)?.[1];
+    document.title = label ? `${about.shortName} · ${label}` : about.shortName;
+  }, [active]);
 
   return (
     <header className={`site-nav ${scrolled ? "scrolled" : ""} ${menu.open ? "open" : ""}`}>
