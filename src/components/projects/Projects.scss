@@ -12,151 +12,509 @@
   }
 
   .project-cards {
+    position: relative; // the open panel covers the whole grid
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
   }
 
-  .project-card {
+  // ---- small card
+  .project-detail {
     height: 300px;
-    perspective: 1200px;
+    border-radius: 15px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    text-align: left;
+    transition: border-color 0.3s ease;
+
+    &:hover,
+    &:first-child {
+      border-color: var(--accent);
+    }
+
+    .status {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--accent-contrast);
+
+      &.wip {
+        background: var(--surface);
+        color: var(--accent);
+        border: 1px dashed var(--accent);
+      }
+    }
+
+    .pd-tagline {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
+    .tags {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+
+      li {
+        font-size: 0.75rem;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+    }
+  }
+
+  .pd-summary {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1.25rem;
+    border-radius: inherit;
+    overflow: hidden;
     cursor: pointer;
 
-    .card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    .pd-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .card-front,
-    .card-back {
-      position: absolute;
-      inset: 0;
-      box-sizing: border-box;
-      backface-visibility: hidden;
-      border-radius: 15px;
+    .pd-body {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      padding: 1.25rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      transition: border-color 0.3s ease;
-    }
+      gap: 0.45rem;
 
-    .card-front {
       h3 {
         margin: 0;
         font-size: 1.3rem;
         font-weight: 600;
       }
+    }
 
-      .front-tags {
-        margin: 0;
-        font-size: 0.85rem;
-        color: var(--text-muted);
+    .pd-tagline {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .pd-foot {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pd-icon-links {
+      display: flex;
+      gap: 0.5rem;
+
+      a {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-size: 1.05rem;
+        transition: border-color 0.2s, color 0.2s;
+
+        &:hover {
+          border-color: var(--accent);
+          color: var(--accent);
+        }
+      }
+    }
+
+    .pd-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 8px 4px;
+      border: none;
+      background: none;
+      color: var(--accent);
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+
+      svg {
+        font-size: 0.8rem;
+        transition: transform 0.2s;
       }
 
-      .status {
-        position: absolute;
-        top: 12px;
-        left: 12px;
+      &:hover svg {
+        transform: translateX(3px);
+      }
+    }
+  }
+
+  // has a live site: screenshot on top, logo on its edge
+  .pd-preview {
+    padding: 0 0 1rem;
+
+    .pd-thumb {
+      width: 100%;
+      height: 118px;
+      flex: none;
+      object-fit: cover;
+      object-position: left top;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pd-head {
+      margin: -30px 1.25rem 0;
+      min-height: 30px;
+    }
+
+    .pd-logo {
+      box-sizing: content-box;
+      padding: 6px;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .status {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    .pd-body,
+    .pd-foot {
+      padding: 0 1.25rem;
+    }
+  }
+
+  // no live site: chips + a divider above the actions
+  .pd-clean {
+    padding-top: 1.4rem;
+
+    .pd-logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .pd-head {
+      justify-content: flex-start;
+      gap: 0.6rem;
+    }
+
+    .pd-foot {
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+  }
+
+  // ---- open: covers every card; numbered story left, a window right
+  .pd-full {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: 2.5rem;
+    padding: 2.25rem 2.5rem;
+    border-radius: 15px;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+    text-align: left;
+    overflow: auto; // safety net; the content is sized to fit
+
+    h3 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .pd-tagline {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
+    .tags {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+
+      li {
         font-size: 0.75rem;
-        font-weight: 600;
         padding: 3px 10px;
         border-radius: 999px;
-        background: var(--accent);
-        color: var(--accent-contrast);
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+    }
+  }
 
-        &.wip {
-          background: transparent;
-          color: var(--accent);
-          border: 1px dashed var(--accent);
-        }
+  .pd-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 1;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .pd-story {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .pd-title {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+
+    img {
+      flex: none;
+    }
+  }
+
+  .pd-panel h4 {
+    margin: 0 0 0.6rem;
+    font-size: 1rem;
+  }
+
+  .pd-numbered {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: n;
+    display: grid;
+    gap: 0.55rem;
+
+    li {
+      counter-increment: n;
+      display: grid;
+      grid-template-columns: 2.1rem 1fr;
+      font-size: 0.95rem;
+      line-height: 1.45;
+
+      &::before {
+        content: counter(n, decimal-leading-zero);
+        color: var(--accent);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+    }
+  }
+
+  .pd-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: var(--accent);
+      color: var(--accent-contrast);
+
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+  }
+
+  // the window: browser bar + screenshot, file tree or description
+  .pd-browser {
+    margin: 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    transform: perspective(1400px) rotateY(-6deg);
+    transform-origin: right center;
+
+    > .tags {
+      margin-top: 0.9rem;
+    }
+  }
+
+  .pd-browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    background: var(--surface-2);
+
+    span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff5f57;
+
+      &:nth-child(2) {
+        background: #febc2e;
+      }
+
+      &:nth-child(3) {
+        background: #28c840;
       }
     }
 
-    &:hover .card-front,
-    &.lead .card-front {
-      border-color: var(--accent);
+    em {
+      flex: 1;
+      min-width: 0;
+      margin-left: 10px;
+      padding: 3px 12px;
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text-muted);
+      font-style: normal;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+  }
 
-    .card-back {
-      transform: rotateY(180deg);
-      justify-content: flex-start;
-      text-align: left;
-      overflow-y: auto;
+  .pd-shot,
+  .pd-window-body {
+    border: 1px solid var(--border);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.25);
+  }
 
-      p {
-        margin: 1rem 0 0;
-        font-size: 0.88rem;
-        line-height: 1.5;
-      }
+  .pd-shot {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 
-      .tags {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
+  .pd-window-body {
+    padding: 1.1rem 1.25rem 1.25rem;
+    background: var(--bg);
+  }
 
-        li {
-          font-size: 0.72rem;
-          padding: 2px 8px;
-          border-radius: 999px;
-          background: var(--accent-soft);
-          color: var(--accent);
-        }
-      }
+  .pd-window-label {
+    margin: 0 0 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
 
-      .project-links {
-        margin-top: auto;
-        display: flex;
-        gap: 0.75rem;
+  .pd-files {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.45rem;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.82rem;
 
-        a {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 8px 14px;
-          border-radius: 8px;
-          font-size: 0.85rem;
-          font-weight: 600;
-          text-decoration: none;
-          background: var(--accent);
-          color: var(--accent-contrast);
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-width: 0;
+      overflow-wrap: anywhere;
 
-          &:hover {
-            opacity: 0.85;
-          }
-        }
-      }
-
-      .close-button {
-        position: absolute;
-        top: 8px;
-        right: 10px;
-        background: none;
-        border: none;
-        color: var(--text);
-        font-size: 1.2rem;
-        cursor: pointer;
+      svg {
+        flex: none;
+        color: var(--accent);
       }
     }
+  }
 
-    &.active .card-inner {
-      transform: rotateY(180deg);
+  .pd-window-text {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  // phones: one column, as tall as its content
+  @media (max-width: 860px) {
+    .pd-full {
+      bottom: auto;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1.25rem;
+      padding: 1.25rem;
+    }
+
+    .pd-title {
+      padding-right: 44px; // room for the close button
+    }
+
+    .pd-browser {
+      transform: none;
     }
   }
 
   @media (max-width: 768px) {
     width: 95%;
   }
+}
+
+// ---- open / close: the card's box grows into the panel (and back), its content revealed as it grows
+html.vt-projects .vt-me:not(.open) .pd-summary,
+html.vt-projects .vt-me .pd-full {
+  view-transition-name: project-detail;
+}
+
+// the rest of the page doesn't change, so it swaps instantly (no whole-page fade)
+html.vt-projects::view-transition-old(root),
+html.vt-projects::view-transition-new(root) {
+  animation: none;
+}
+
+html.vt-projects::view-transition-group(project-detail) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: clip;
+  border-radius: 15px;
+}
+
+// keep both snapshots at their real size, pinned top-left, so nothing stretches
+html.vt-projects::view-transition-old(project-detail),
+html.vt-projects::view-transition-new(project-detail) {
+  width: 100%;
+  height: 100%;
+  object-fit: none;
+  object-position: left top;
+  animation-duration: 0.3s;
 }

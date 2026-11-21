@@ -264,76 +264,260 @@ export const journeyToday = {
   tags: ["Claude API", "React", "Node.js", "PostgreSQL", "Open source"],
 };
 
+// kept short on purpose: the open card must fit inside the grid of cards
+export type ProjectDetails = {
+  // shown in a browser window; without one, the window shows `files` (or the description)
+  screenshot?: { src: string; alt: string };
+  // real paths from the public repo, shown as its file tree
+  files?: string[];
+  solved: string[];
+  learned?: string[];
+};
+
 export type Project = {
   title: string;
-  description: string;
+  tagline: string; // one line on the small card
+  description: string; // the window text when there's no screenshot or repo
   tags: string[];
   repo?: string;
   live?: string;
   status?: string;
+  logo?: string;
+  details: ProjectDetails;
+};
+
+export const projectsText = {
+  heading: "🚀 Featured Projects",
+  code: "Code",
+  live: "Live demo",
+  open: "Details",
+  close: "Close details",
+  solved: "What it solves",
+  learned: "What I learned",
+  stack: "Stack",
+  files: "Files in the repo",
 };
 
 // Order matters: first item is the lead project.
+// Facts come from each public repo (README, file tree, code); "learned" lines are DRAFTS for the user to confirm.
 export const projects: Project[] = [
   {
+    // facts from the public repo: README.md + AGENTS.md
     title: "cashflow",
     status: "Featured",
+    logo: asset("projects/cashflow-logo.svg"),
+    tagline: "Household expense tracker that runs entirely on your own computer.",
     description:
       "A household expense tracker that runs entirely on your own machine. Reads bank PDFs from nine banks, queues rows for review with duplicate detection, and checks every statement against its printed balances to the cent.",
-    tags: ["React", "Vite", "Tailwind", "Node.js", "Express", "PostgreSQL", "Claude API"],
+    tags: ["React 19", "Vite", "Tailwind v4", "Node.js", "Express 5", "PostgreSQL", "Claude API"],
     repo: "https://github.com/sujithsadineni/cashflow",
     live: "https://sujithsadineni.github.io/cashflow/",
+    details: {
+      screenshot: {
+        src: asset("projects/cashflow-overview.jpg"),
+        alt: "cashflow's Overview page in the Glass design: income, spend, loans and savings for the month, an activity chart and a category breakdown",
+      },
+      solved: [
+        "Statements from nine banks in one place, without sharing bank logins",
+        "Nothing is saved until you review it",
+        "Every statement balanced to the cent",
+      ],
+      // TODO(user): draft from the repo's rules; confirm or rewrite in your own words
+      learned: [
+        "Moving from Java / Spring Boot to Node, Express and React",
+        "Money as integer cents, never floats",
+        "Using the Claude API safely: opt-in, one file at a time",
+      ],
+    },
   },
   {
-    // TODO: final name + repo link once published
-    title: "Dependency Watch",
+    // github.com/sujithsadineni/patchpilot: coming-soon page for now, tool built later
+    title: "patchpilot",
+    logo: asset("projects/patchpilot-logo.svg"),
     status: "In progress",
+    tagline: "Finds vulnerable npm packages and the safe version to move to.",
     description:
       "Automatic vulnerability-fix (VF) detection and new-version upgrade detection for npm projects: reads npm audit, finds the n-1 stable version for each package, and proposes the upgrade.",
     tags: ["Node.js", "npm audit", "Automation"],
+    repo: "https://github.com/sujithsadineni/patchpilot",
+    live: "https://sujithsadineni.github.io/patchpilot/",
+    details: {
+      screenshot: {
+        src: asset("projects/patchpilot-soon.jpg"),
+        alt: "patchpilot coming-soon page in dark mode: shield logo, Coming soon badge and the three planned steps",
+      },
+      solved: [
+        "Reads npm audit and lists what needs fixing",
+        "Finds the n-1 stable version for each package",
+        "Proposes the upgrade",
+      ],
+    },
   },
   {
-    title: "AWS S3 File Upload",
+    // facts from github.com/sujithsadineni/aws-dropvault (README, infra/lib/stack.ts); v1 = tag v1-express-postgres
+    title: "aws-dropvault",
+    logo: asset("projects/dropvault-logo.svg"),
+    tagline: "Private file uploads on AWS: straight to S3, with sign-in, thumbnails and infrastructure as code.",
     description:
-      "Full-stack file upload app: React + Apollo Client front end, an Apollo Server GraphQL API on Express with multipart uploads, Knex over PostgreSQL, and file storage in an AWS S3 bucket.",
-    tags: ["React", "Apollo", "GraphQL", "Express", "PostgreSQL", "AWS S3"],
-    repo: "https://github.com/sujithsadineni/File-Upload-S3",
+      "My 2025 file uploader rebuilt as a serverless AWS app: presigned uploads straight to a private S3 bucket, Cognito login, API Gateway + Lambda, DynamoDB records and S3-event thumbnails, all defined in AWS CDK.",
+    tags: ["AWS CDK", "S3", "Lambda", "API Gateway", "DynamoDB", "Cognito"],
+    repo: "https://github.com/sujithsadineni/aws-dropvault",
+    live: "https://sujithsadineni.github.io/aws-dropvault/",
+    details: {
+      screenshot: {
+        src: asset("projects/dropvault-vault.jpg"),
+        alt: "aws-dropvault in dark mode: a drop zone, the five-step How it works on AWS panel and a grid of uploaded files with thumbnails",
+      },
+      solved: [
+        "Upload from the browser straight to S3, with size and type enforced by S3",
+        "Each person signs in and sees only their own files",
+        "Image thumbnails made automatically after upload",
+      ],
+      // TODO(user): Claude's draft; confirm or rewrite in your own words
+      learned: [
+        "Presigned URLs instead of passing files through a server",
+        "Event-driven work: S3 → Lambda",
+        "A whole AWS stack as code with CDK",
+      ],
+    },
   },
   {
-    title: "MyPosts.com",
+    // facts from github.com/sujithsadineni/postdeck (README, src/); v1 (Myposts.com GraphQL API) = tag v1-graphql-knex
+    title: "postdeck",
+    logo: asset("projects/postdeck-logo.svg"),
+    tagline: "A posts admin console built with Ant Design 6: charts, tables, forms and themes.",
     description:
-      "Posts platform API built with Apollo Server on Express, Knex migrations over PostgreSQL, and bcrypt + JWT authentication and authorization.",
-    tags: ["Apollo Server", "GraphQL", "Knex", "PostgreSQL", "JWT"],
-    repo: "https://github.com/sujithsadineni/Myposts.com",
+      "My 2025 Myposts.com GraphQL API rebuilt as a front-end admin console on generated sample data: dashboard charts, a full-featured posts table with CSV and Excel export and import, a three-step editor, a calendar, and light, dark and compact themes.",
+    tags: ["React 19", "Ant Design 6", "TypeScript", "Charts", "faker", "Vite"],
+    repo: "https://github.com/sujithsadineni/postdeck",
+    live: "https://sujithsadineni.github.io/postdeck/",
+    details: {
+      screenshot: {
+        src: asset("projects/postdeck-dashboard.jpg"),
+        alt: "postdeck dashboard in dark mode: stat cards, a views-by-week area chart and a posts-by-status donut chart",
+      },
+      solved: [
+        "Sort, filter, search and bulk-edit posts in one table",
+        "Export posts to CSV or Excel, and import them back from CSV",
+        "Write, schedule and preview posts with a validated three-step form",
+      ],
+      // TODO(user): Claude's draft; confirm or rewrite in your own words
+      learned: [
+        "Building a whole admin UI from Ant Design 6 components",
+        "Theming with design tokens: dark, compact and brand colour",
+        "Safe spreadsheet export: no formulas run from cell text",
+      ],
+    },
   },
   {
-    title: "Posts Full-Stack App",
+    // facts from github.com/sujithsadineni/posterwall (README + docs/LEARNED.md); v1 = tag v1-rest-mysql
+    title: "PosterWall",
+    logo: asset("projects/posterwall-logo.svg"),
+    tagline: "Movie posters in five languages: rate, like and discuss.",
     description:
-      "Interactive posts app with a React + Ant Design client and an Express GraphQL server using Sequelize on MySQL, with JWT-based login.",
-    tags: ["React", "Ant Design", "Express", "GraphQL", "Sequelize", "MySQL"],
-    repo: "https://github.com/sujithsadineni/Full-Stack",
+      "A movie-poster board rebuilt from my 2025 posts app: GraphQL and PostgreSQL in place of REST and MySQL, poster uploads, ratings, likes, comments and sharing, with a React 19 + shadcn/ui front end.",
+    tags: ["React 19", "GraphQL", "PostgreSQL", "Drizzle", "shadcn/ui", "Playwright"],
+    repo: "https://github.com/sujithsadineni/posterwall",
+    live: "https://sujithsadineni.github.io/posterwall/",
+    details: {
+      screenshot: {
+        src: asset("projects/posterwall-wall.jpg"),
+        alt: "PosterWall in dark mode: language filter chips and a grid of movie posters with ratings, likes and comments",
+      },
+      solved: [
+        "Post a movie with its poster, a rating and a review",
+        "Browse English, UK, Hindi, Telugu and Tamil films",
+        "Likes, comments and share links on every movie",
+      ],
+      // TODO(user): draft from docs/LEARNED.md; confirm or rewrite in your own words
+      learned: [
+        "Rebuilding REST + MySQL as GraphQL + PostgreSQL",
+        "Safe image uploads, checked by their bytes",
+        "Tests first: API tests plus Playwright",
+      ],
+    },
   },
   {
     title: "Portfolio Website",
+    logo: asset("logo.png"), // the site's golden S (favicon)
+    tagline: "This site: React 19 and TypeScript, light and dark, five mini-games.",
     description:
       "This site: React 19, TypeScript, Vite and SCSS with light/dark themes, deployed to GitHub Pages.",
-    tags: ["React", "TypeScript", "Vite", "SCSS"],
+    tags: ["React 19", "TypeScript", "Vite", "SCSS"],
     repo: "https://github.com/sujithsadineni/Portfolio",
     live: "https://sujithsadineni.github.io/Portfolio/",
+    details: {
+      screenshot: {
+        src: asset("projects/portfolio-home.jpg"),
+        alt: "This portfolio's home page in the dark theme: the intro on the left and the Stack Match mini-game on the right",
+      },
+      solved: [
+        "One place for my work, experience and projects",
+        "Light and dark themes that fit any phone",
+        "Five small games that make a visit memorable",
+      ],
+      learned: [
+        "View Transitions and scroll-driven animation without libraries",
+        "Keyboard, focus, contrast and reduced-motion support",
+        "Shipping a Vite app to GitHub Pages",
+      ],
+    },
   },
   {
-    title: "Lifestyle Store",
+    // facts from github.com/sujithsadineni/aisle (README, src/); v1 (2021 PHP + MySQL Lifestyle Store) = tag v1-php-2021
+    title: "aisle",
+    logo: asset("projects/aisle-logo.svg"),
+    tagline: "A modern storefront: filters, product options, cart with promo codes and a three-step checkout.",
     description:
-      "E-commerce store with sign-up/login, product catalogue, cart and checkout, built in PHP with a MySQL database.",
-    tags: ["PHP", "MySQL", "Bootstrap"],
-    repo: "https://github.com/sujithsadineni/internsala_final_project",
+      "My 2021 PHP + MySQL Lifestyle Store rebuilt as a React storefront: 24 products with drawn pictures, filters and search, colour and size options, a cart with promo codes and GST, and checkout by card, UPI or cash on delivery.",
+    tags: ["React 19", "TypeScript", "E-commerce", "CSS", "Accessibility", "Vite"],
+    repo: "https://github.com/sujithsadineni/aisle",
+    live: "https://sujithsadineni.github.io/aisle/",
+    details: {
+      screenshot: {
+        src: asset("projects/aisle-home.jpg"),
+        alt: "aisle home page: a Good things, well made hero with drawn camera, watch and sneaker, and a shop-by-category row",
+      },
+      solved: [
+        "Find products fast with filters, search and sort",
+        "Pick colour, size and quantity, then pay by card, UPI or cash",
+        "Promo codes, free delivery over ₹2,999 and GST worked out in the cart",
+      ],
+      // TODO(user): Claude's draft; confirm or rewrite in your own words
+      learned: [
+        "Rebuilding a PHP + MySQL store as a modern front end",
+        "Cart maths: stock limits, promos, shipping and tax",
+        "A step-by-step checkout that checks every field",
+      ],
+    },
   },
   {
-    // TODO: no public repo — add link or replace
-    title: "House Renting Website",
+    // facts from github.com/sujithsadineni/doorway (README, src/); v1 (2021 static login page) = tag v1-static-2021
+    title: "doorway",
+    logo: asset("projects/doorway-logo.svg"),
+    tagline: "Ten 2026 designs for log in, sign up and checkout, with Apple, Google and passkey buttons.",
     description:
-      "A replica of Sulekha.com with a clean UI and a more advanced search algorithm.",
-    tags: [],
+      "My 2021 login and sign-up pages rebuilt as a React design gallery: ten styles (Liquid Glass, Bento, Neo-Brutalism, Terminal, Spatial and more) for log in, sign up and checkout, sharing one set of validated, accessible form components.",
+    tags: ["React 19", "TypeScript", "CSS", "Accessibility", "UI design", "Vite"],
+    repo: "https://github.com/sujithsadineni/doorway",
+    live: "https://sujithsadineni.github.io/doorway/",
+    details: {
+      screenshot: {
+        src: asset("projects/doorway-gallery.jpg"),
+        alt: "doorway gallery in dark mode: eight of the ten login designs shown as cards, from Liquid Glass to Swiss Grid",
+      },
+      solved: [
+        "Log in, sign up and checkout in ten distinct design styles",
+        "Apple, Google and passkey sign-in, Apple Pay and Google Pay buttons",
+        "Live checks: password strength, card number, expiry and CVC",
+      ],
+      // TODO(user): Claude's draft; confirm or rewrite in your own words
+      learned: [
+        "One set of form components, ten looks, all in CSS",
+        "Accessible forms: labels, linked errors, focus rings",
+        "Card checks: Luhn, brand detection and formatting",
+      ],
+    },
   },
 ];
 
