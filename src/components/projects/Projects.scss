@@ -518,3 +518,8 @@ html.vt-projects::view-transition-new(project-detail) {
   object-position: left top;
   animation-duration: 0.3s;
 }
+// only the new snapshot shows: crossfading both put two layers of text on top of each other
+html.vt-projects::view-transition-old(project-detail) {
+  animation: none;
+  opacity: 0;
+}
